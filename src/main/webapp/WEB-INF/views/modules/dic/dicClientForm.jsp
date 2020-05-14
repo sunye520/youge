@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/views/include/taglib.jsp"%>
 <html>
 <head>
-	<title>客户资料管理</title>
+	<title>消费记录管理</title>
 	<meta name="decorator" content="default"/>
 	<script type="text/javascript">
 		$(document).ready(function() {
@@ -27,29 +27,28 @@
 </head>
 <body>
 	<ul class="nav nav-tabs">
-		<li><a href="${ctx}/dic/dicClient/">客户资料列表</a></li>
-		<li class="active"><a href="${ctx}/dic/dicClient/form?id=${dicClient.id}">客户资料<shiro:hasPermission name="dic:dicClient:edit">${not empty dicClient.id?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission name="dic:dicClient:edit">查看</shiro:lacksPermission></a></li>
+		<li><a href="${ctx}/dic/dicClient/">消费记录列表</a></li>
+		<li class="active"><a href="${ctx}/dic/dicClient/form?id=${dicClient.id}">消费记录<shiro:hasPermission name="dic:dicClient:edit">${not empty dicClient.id?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission name="dic:dicClient:edit">查看</shiro:lacksPermission></a></li>
 	</ul><br/>
 	<form:form id="inputForm" modelAttribute="dicClient" action="${ctx}/dic/dicClient/save" method="post" class="form-horizontal">
 		<form:hidden path="id"/>
-		<sys:message content="${message}"/>
-		<div class="control-group">
-			<label class="control-label">车牌号：</label>
-			<div class="controls">
-				<form:input path="numberPlate" htmlEscape="false" maxlength="20" class="input-xlarge required"/>
-				<span class="help-inline"><font color="red">*</font> </span>
-			</div>
-		</div>
+		<sys:message content="${message}"/>		
 		<div class="control-group">
 			<label class="control-label">电话：</label>
 			<div class="controls">
-				<form:input path="phone" htmlEscape="false" maxlength="20" class="input-xlarge"/>
+				<form:input path="phone" htmlEscape="false" maxlength="20" class="input-xlarge "/>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">客户名称：</label>
 			<div class="controls">
-				<form:input path="name" htmlEscape="false" maxlength="20" class="input-xlarge"/>
+				<form:input path="name" htmlEscape="false" maxlength="20" class="input-xlarge "/>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">车牌号：</label>
+			<div class="controls">
+				<form:input path="numberPlate" htmlEscape="false" maxlength="20" class="input-xlarge "/>
 			</div>
 		</div>
 		<div class="control-group">

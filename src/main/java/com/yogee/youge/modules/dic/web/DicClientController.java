@@ -23,9 +23,9 @@ import com.yogee.youge.modules.dic.entity.DicClient;
 import com.yogee.youge.modules.dic.service.DicClientService;
 
 /**
- * 客户资料Controller
+ * 消费记录Controller
  * @author sunye
- * @version 2020-05-13
+ * @version 2020-05-14
  */
 @Controller
 @RequestMapping(value = "${adminPath}/dic/dicClient")
@@ -68,7 +68,7 @@ public class DicClientController extends BaseController {
 			return form(dicClient, model);
 		}
 		dicClientService.save(dicClient);
-		addMessage(redirectAttributes, "保存客户资料成功");
+		addMessage(redirectAttributes, "保存消费记录成功");
 		return "redirect:"+Global.getAdminPath()+"/dic/dicClient/?repage";
 	}
 	
@@ -76,7 +76,7 @@ public class DicClientController extends BaseController {
 	@RequestMapping(value = "delete")
 	public String delete(DicClient dicClient, RedirectAttributes redirectAttributes) {
 		dicClientService.delete(dicClient);
-		addMessage(redirectAttributes, "删除客户资料成功");
+		addMessage(redirectAttributes, "删除消费记录成功");
 		return "redirect:"+Global.getAdminPath()+"/dic/dicClient/?repage";
 	}
 

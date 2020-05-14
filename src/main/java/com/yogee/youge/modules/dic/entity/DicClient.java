@@ -8,9 +8,9 @@ import org.hibernate.validator.constraints.Length;
 import com.yogee.youge.common.persistence.DataEntity;
 
 /**
- * 客户资料Entity
+ * 消费记录Entity
  * @author sunye
- * @version 2020-05-13
+ * @version 2020-05-14
  */
 public class DicClient extends DataEntity<DicClient> {
 	
@@ -18,7 +18,7 @@ public class DicClient extends DataEntity<DicClient> {
 	private String phone;		// 电话
 	private String name;		// 客户名称
 	private String numberPlate;		// 车牌号
-	
+
 	public DicClient() {
 		super();
 	}
@@ -53,5 +53,5 @@ public class DicClient extends DataEntity<DicClient> {
 	public void setNumberPlate(String numberPlate) {
 		this.numberPlate = numberPlate;
 	}
-	
+
 }

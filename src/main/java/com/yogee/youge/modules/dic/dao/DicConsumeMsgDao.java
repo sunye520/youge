@@ -5,9 +5,11 @@ package com.yogee.youge.modules.dic.dao;
 
 import com.yogee.youge.common.persistence.CrudDao;
 import com.yogee.youge.common.persistence.annotation.MyBatisDao;
-import com.yogee.youge.modules.dic.entity.DicClient;
+import com.yogee.youge.modules.dic.entity.DicConsumeMsg;
+import com.yogee.youge.modules.dic.entity.ExportConsumeMsg;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 消费记录DAO接口
@@ -15,5 +17,9 @@ import java.util.List;
  * @version 2020-05-14
  */
 @MyBatisDao
-public interface DicClientDao extends CrudDao<DicClient> {
+public interface DicConsumeMsgDao extends CrudDao<DicConsumeMsg> {
+
+    List<ExportConsumeMsg> findAllExport(DicConsumeMsg dicConsumeMsg);
+
+    String sumMoney(DicConsumeMsg dicConsumeMsg);
 }

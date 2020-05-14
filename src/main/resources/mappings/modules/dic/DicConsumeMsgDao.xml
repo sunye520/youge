@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yogee.youge.modules.dic.dao.DicConsumeMsgDao">
+    
+	<sql id="dicConsumeMsgColumns">
+		a.id AS "id",
+		a.client_id AS "clientId",
+		a.create_date AS "createDate",
+		a.update_date AS "updateDate",
+		a.consume_date AS "consumeDate",
+		a.consume_msg AS "consumeMsg",
+		a.consume_money AS "consumeMoney",
+		a.del_flag AS "delFlag",
+		c.number_plate AS "numberPlate",
+		c.phone AS "phone",
+		c.name AS "name"
+	</sql>
+	
+	<sql id="dicConsumeMsgJoins">
+		left JOIN dic_client  c ON c.id = a.client_id
+	</sql>
+    
+	<select id="get" resultType="DicConsumeMsg">
+		SELECT 
+			<include refid="dicConsumeMsgColumns"/>
+		FROM dic_consume_msg a
+		<include refid="dicConsumeMsgJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="DicConsumeMsg">
+		SELECT 
+			<include refid="dicConsumeMsgColumns"/>
+		FROM dic_consume_msg a
+		<include refid="dicConsumeMsgJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="numberPlate != null and numberPlate != ''">
+				AND c.number_plate LIKE
+					<if test="dbName == 'oracle'">'%'||#{numberPlate}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{numberPlate}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{numberPlate},'%')</if>
+			</if>
+			<if test="phone != null and phone != ''">
+				AND c.phone LIKE
+				<if test="dbName == 'oracle'">'%'||#{phone}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{phone}+'%'</if>
+				<if test="dbName == 'mysql'">concat('%',#{phone},'%')</if>
+			</if>
+			<if test="name != null and name != ''">
+				AND c.name LIKE
+				<if test="dbName == 'oracle'">'%'||#{name}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{name}+'%'</if>
+				<if test="dbName == 'mysql'">concat('%',#{name},'%')</if>
+			</if>
+		</where>
+		ORDER BY consume_date desc,client_id
+	</select>
+	
+	<select id="findAllList" resultType="DicConsumeMsg">
+		SELECT 
+			<include refid="dicConsumeMsgColumns"/>
+		FROM dic_consume_msg a
+		<include refid="dicConsumeMsgJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO dic_consume_msg(
+			id,
+			client_id,
+			create_date,
+			update_date,
+			consume_date,
+			consume_msg,
+			consume_money,
+			del_flag
+		) VALUES (
+			#{id},
+			#{clientId},
+			#{createDate},
+			#{updateDate},
+			#{consumeDate},
+			#{consumeMsg},
+			#{consumeMoney},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE dic_consume_msg SET 	
+			number_plate = #{numberPlate},
+			update_date = #{updateDate},
+			consume_date = #{consumeDate},
+			consume_msg = #{consumeMsg},
+			consume_money = #{consumeMoney}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE dic_consume_msg SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+
+	<select id="findAllExport" parameterType="map" resultType="ExportConsumeMsg">
+		SELECT
+				a.consume_date AS "consumeDate",
+				a.consume_msg AS "consumeMsg",
+				a.consume_money AS "consumeMoney",
+				c.number_plate AS "numberPlate",
+				c.phone AS "phone",
+				c.name AS "name"
+		FROM dic_consume_msg a
+		left JOIN dic_client  c ON c.id = a.client_id
+		<where>
+			a.del_flag = '0'
+			<if test="numberPlate != null and numberPlate != ''">
+				AND c.number_plate LIKE
+				<if test="dbName == 'oracle'">'%'||#{numberPlate}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{numberPlate}+'%'</if>
+				<if test="dbName == 'mysql'">concat('%',#{numberPlate},'%')</if>
+			</if>
+			<if test="phone != null and phone != ''">
+				AND c.phone LIKE
+				<if test="dbName == 'oracle'">'%'||#{phone}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{phone}+'%'</if>
+				<if test="dbName == 'mysql'">concat('%',#{phone},'%')</if>
+			</if>
+			<if test="name != null and name != ''">
+				AND c.name LIKE
+				<if test="dbName == 'oracle'">'%'||#{name}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{name}+'%'</if>
+				<if test="dbName == 'mysql'">concat('%',#{name},'%')</if>
+			</if>
+		</where>
+				ORDER BY consume_date desc,client_id
+	</select>
+
+
+	<select id="sumMoney" resultType="java.lang.String">
+		SELECT
+			SUM(a.consume_money) as sumMoney
+		FROM dic_consume_msg a
+		left JOIN dic_client  c ON c.id = a.client_id
+		<where>
+			a.del_flag = '0'
+			<if test="numberPlate != null and numberPlate != ''">
+				AND c.number_plate LIKE
+				<if test="dbName == 'oracle'">'%'||#{numberPlate}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{numberPlate}+'%'</if>
+				<if test="dbName == 'mysql'">concat('%',#{numberPlate},'%')</if>
+			</if>
+			<if test="phone != null and phone != ''">
+				AND c.phone LIKE
+				<if test="dbName == 'oracle'">'%'||#{phone}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{phone}+'%'</if>
+				<if test="dbName == 'mysql'">concat('%',#{phone},'%')</if>
+			</if>
+			<if test="name != null and name != ''">
+				AND c.name LIKE
+				<if test="dbName == 'oracle'">'%'||#{name}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{name}+'%'</if>
+				<if test="dbName == 'mysql'">concat('%',#{name},'%')</if>
+			</if>
+		</where>
+	</select>
+
+
+	
+</mapper>

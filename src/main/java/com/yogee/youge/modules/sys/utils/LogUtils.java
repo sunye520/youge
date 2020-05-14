@@ -41,7 +41,7 @@ public class LogUtils {
 	 * 保存日志
 	 */
 	public static void saveLog(HttpServletRequest request, String title){
-		saveLog(request, null, null, title);
+//		saveLog(request, null, null, title);
 	}
 	
 	/**

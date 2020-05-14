@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/views/include/taglib.jsp"%>
 <html>
 <head>
-	<title>客户资料管理</title>
+	<title>消费记录管理</title>
 	<meta name="decorator" content="default"/>
 	<script type="text/javascript">
 		$(document).ready(function() {
@@ -18,8 +18,8 @@
 </head>
 <body>
 	<ul class="nav nav-tabs">
-		<li class="active"><a href="${ctx}/dic/dicClient/">客户资料列表</a></li>
-		<shiro:hasPermission name="dic:dicClient:edit"><li><a href="${ctx}/dic/dicClient/form">客户资料添加</a></li></shiro:hasPermission>
+		<li class="active"><a href="${ctx}/dic/dicClient/">消费记录列表</a></li>
+		<shiro:hasPermission name="dic:dicClient:edit"><li><a href="${ctx}/dic/dicClient/form">消费记录添加</a></li></shiro:hasPermission>
 	</ul>
 	<form:form id="searchForm" modelAttribute="dicClient" action="${ctx}/dic/dicClient/" method="post" class="breadcrumb form-search">
 		<input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
@@ -67,7 +67,7 @@
 				<shiro:hasPermission name="dic:dicClient:edit">
 					<td>
     					<a href="${ctx}/dic/dicClient/form?id=${dicClient.id}">修改</a>
-						<a href="${ctx}/dic/dicClient/delete?id=${dicClient.id}" onclick="return confirmx('确认要删除该客户资料吗？', this.href)">删除</a>
+						<a href="${ctx}/dic/dicClient/delete?id=${dicClient.id}" onclick="return confirmx('确认要删除该消费记录吗？', this.href)">删除</a>
 					</td>
 				</shiro:hasPermission>
 			</tr>

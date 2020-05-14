@@ -5,6 +5,7 @@ package com.yogee.youge.modules.dic.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,13 +15,15 @@ import com.yogee.youge.modules.dic.entity.DicClient;
 import com.yogee.youge.modules.dic.dao.DicClientDao;
 
 /**
- * 客户资料Service
+ * 消费记录Service
  * @author sunye
- * @version 2020-05-13
+ * @version 2020-05-14
  */
 @Service
 @Transactional(readOnly = true)
 public class DicClientService extends CrudService<DicClientDao, DicClient> {
+	@Autowired
+	DicClientDao dicClientDao;
 
 	public DicClient get(String id) {
 		return super.get(id);
@@ -43,5 +46,5 @@ public class DicClientService extends CrudService<DicClientDao, DicClient> {
 	public void delete(DicClient dicClient) {
 		super.delete(dicClient);
 	}
-	
+
 }
