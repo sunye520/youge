@@ -239,7 +239,7 @@
 				</div>
 			</div>
 		    <div id="footer" class="row-fluid">
-	            Copyright &copy; ${fns:getConfig('copyrightYear')} ${fns:getConfig('productName')} - Powered By <a href="http://www.yogee.xin" target="_blank">Yogee</a> ${fns:getConfig('version')}
+	            Copyright &copy; ${fns:getConfig('copyrightYear')} ${fns:getConfig('productName')} - Powered By sunye ${fns:getConfig('version')}
 			</div>
 		</div>
 	</div>

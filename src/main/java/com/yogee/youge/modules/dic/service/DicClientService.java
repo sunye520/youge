@@ -47,4 +47,7 @@ public class DicClientService extends CrudService<DicClientDao, DicClient> {
 		super.delete(dicClient);
 	}
 
+	public int findCountByNumberPlate(String numberPlate) {
+		return dicClientDao.findCountByNumberPlate(numberPlate);
+	}
 }

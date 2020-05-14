@@ -4,6 +4,8 @@
 package com.yogee.youge.modules.dic.entity;
 
 import org.hibernate.validator.constraints.Length;
+
+import java.math.BigDecimal;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -20,7 +22,7 @@ public class DicConsumeMsg extends DataEntity<DicConsumeMsg> {
 	private String clientId;		// 客户资料id
 	private Date consumeDate;		// 消费时间
 	private String consumeMsg;		// 消费信息
-	private String consumeMoney;		// 消费金额
+	private BigDecimal consumeMoney;		// 消费金额
 	private String numberPlate;		// 车牌号
 	private String phone;		// 电话
 	private String name;		// 客户名称
@@ -58,12 +60,12 @@ public class DicConsumeMsg extends DataEntity<DicConsumeMsg> {
 	public void setConsumeMsg(String consumeMsg) {
 		this.consumeMsg = consumeMsg;
 	}
-	
-	public String getConsumeMoney() {
+
+	public BigDecimal getConsumeMoney() {
 		return consumeMoney;
 	}
 
-	public void setConsumeMoney(String consumeMoney) {
+	public void setConsumeMoney(BigDecimal consumeMoney) {
 		this.consumeMoney = consumeMoney;
 	}
 

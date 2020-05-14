@@ -25,14 +25,14 @@
 		<input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
 		<input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
 		<ul class="ul-form">
-			<li><label>电话：</label>
-				<form:input path="phone" htmlEscape="false" maxlength="20" class="input-medium"/>
+			<li><label>车牌号：</label>
+				<form:input path="numberPlate" htmlEscape="false" maxlength="20" class="input-medium"/>
 			</li>
 			<li><label>客户名称：</label>
 				<form:input path="name" htmlEscape="false" maxlength="20" class="input-medium"/>
 			</li>
-			<li><label>车牌号：</label>
-				<form:input path="numberPlate" htmlEscape="false" maxlength="20" class="input-medium"/>
+			<li><label>电话：</label>
+				<form:input path="phone" htmlEscape="false" maxlength="20" class="input-medium"/>
 			</li>
 			<li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/>
                 <a href="${ctx}/dic/dicConsumeMsg/export?phone=${dicConsumeMsg.phone}&name=${dicConsumeMsg.name}&numberPlate=${dicConsumeMsg.numberPlate}&sumMoney=${sumMoney}" class="btn btn-primary" >导出数据</a>
@@ -45,9 +45,9 @@
 	<table id="contentTable" class="table table-striped table-bordered table-condensed">
 		<thead>
 			<tr>
+				<th>车牌号</th>
 				<th>客户姓名</th>
 				<th>客户电话</th>
-				<th>车牌号</th>
 				<th>消费时间</th>
 				<th style="width: 600px;">消费信息</th>
 				<th>消费金额</th>
@@ -58,13 +58,13 @@
 		<c:forEach items="${page.list}" var="dicConsumeMsg">
 			<tr>
 				<td><a href="${ctx}/dic/dicConsumeMsg/form?id=${dicConsumeMsg.id}">
-					${dicConsumeMsg.name}
+						${dicConsumeMsg.numberPlate}
 				</a></td>
 				<td>
-						${dicConsumeMsg.phone}
+						${dicConsumeMsg.name}
 				</td>
 				<td>
-						${dicConsumeMsg.numberPlate}
+						${dicConsumeMsg.phone}
 				</td>
 				<td>
 					<fmt:formatDate value="${dicConsumeMsg.consumeDate}" pattern="yyyy-MM-dd"/>

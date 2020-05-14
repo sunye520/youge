@@ -6,6 +6,8 @@ package com.yogee.youge.modules.dic.web;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.yogee.youge.common.utils.DateUtils;
 import com.yogee.youge.common.utils.excel.ExportExcel;
 import com.yogee.youge.modules.dic.entity.DicClient;
@@ -18,6 +20,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.yogee.youge.common.config.Global;
@@ -103,6 +106,7 @@ public class DicConsumeMsgController extends BaseController {
 		addMessage(redirectAttributes, "删除消费记录成功");
 		return "redirect:"+Global.getAdminPath()+"/dic/dicConsumeMsg/?repage";
 	}
+
 
     /**
      * 导出消费记录

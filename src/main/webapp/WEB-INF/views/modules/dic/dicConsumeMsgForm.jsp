@@ -23,6 +23,28 @@
 				}
 			});
 		});
+
+
+		function getNameAndPhone(value) {
+			$.ajax({
+				url: '${ctx}/dic/dicClient/getNameAndPhone',
+				type: 'POST',
+				dataType: 'text',
+				timeout: 30000, //超时时间：30秒
+				data: {
+					id : value
+				},
+				success: function (result) {
+					var data = eval('(' + result + ')');
+					$("#name").val(data.name);
+					$("#phone").val(data.phone);
+				},
+				error: function () {
+					alert('ajax数据提取异常！');
+				}
+
+			});
+		}
 	</script>
 </head>
 <body>
@@ -37,16 +59,28 @@
 			<label class="control-label">车牌号：</label>
 			<div class="controls">
 				<%--<form:input path="numberPlate" htmlEscape="false" maxlength="20" class="input-xlarge required"/>--%>
-				<form:select path="clientId" class="input-xlarge required" multiple="false" placeholder="请选择车牌号" >
-					<form:options items="${dicClientList}" itemLabel="name"  itemValue="id" htmlEscape="false"  />
+				<form:select path="clientId" class="input-xlarge required" multiple="false" placeholder="请选择车牌号"  onchange="getNameAndPhone(this.value)" >
+					<form:options items="${dicClientList}" itemLabel="numberPlate"  itemValue="id" htmlEscape="false"  />
 				</form:select>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">
+			<label class="control-label">客户姓名：</label>
+			<div class="controls">
+				<form:input path="name" id="name" htmlEscape="false" maxlength="20" class="input-xlarge" readonly="true"/>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">客户电话：</label>
+			<div class="controls">
+				<form:input path="phone" id="phone" htmlEscape="false" maxlength="20" class="input-xlarge" readonly="true"/>
+			</div>
+		</div>
+		<div class="control-group">
 			<label class="control-label">消费时间：</label>
 			<div class="controls">
-				<input name="consumeDate" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate "
+				<input name="consumeDate" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate required"
 					value="<fmt:formatDate value="${consumeDate}" pattern="yyyy-MM-dd"/>"
 					onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/>
 			</div>
@@ -54,13 +88,15 @@
 		<div class="control-group">
 			<label class="control-label">消费信息：</label>
 			<div class="controls">
-				<form:textarea path="consumeMsg" htmlEscape="false" style="width: 400px;height: 200px;"/>
+				<form:textarea path="consumeMsg" htmlEscape="false" style="width: 400px;height: 200px;" class="required"/>
+				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">消费金额：</label>
 			<div class="controls">
-				<form:input type="number" path="consumeMoney" htmlEscape="false" class="input-xlarge "/>
+				<form:input type="number" path="consumeMoney" htmlEscape="false" value="0" class="input-xlarge required"/>
+				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="form-actions">
