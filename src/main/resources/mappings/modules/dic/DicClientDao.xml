@@ -55,7 +55,7 @@
 				ORDER BY ${page.orderBy}
 			</when>
 			<otherwise>
-				ORDER BY a.update_date DESC
+				ORDER BY a.create_date
 			</otherwise>
 		</choose>
 	</select>
@@ -116,8 +116,11 @@
 		WHERE id = #{id}
 	</update>
 
-	<select id="findCountByNumberPlate" parameterType="java.lang.String" resultType="java.lang.Integer">
+	<select id="findCountByNumberPlate"  resultType="java.lang.Integer">
 		SELECT count(id) FROM dic_client WHERE del_flag = 0 AND number_plate = #{numberPlate}
+		<if test="id != null and id != ''">
+			AND id != #{id}
+		</if>
 	</select>
 
 </mapper>

@@ -17,5 +17,5 @@ import java.util.List;
 @MyBatisDao
 public interface DicClientDao extends CrudDao<DicClient> {
 
-    int findCountByNumberPlate(String numberPlate);
+    int findCountByNumberPlate(DicClient dicClient);
 }

@@ -17,7 +17,7 @@
 	</sql>
 	
 	<sql id="dicConsumeMsgJoins">
-		left JOIN dic_client  c ON c.id = a.client_id
+		left JOIN dic_client  c ON c.id = a.client_id and c.del_flag = '0'
 	</sql>
     
 	<select id="get" resultType="DicConsumeMsg">
@@ -124,7 +124,7 @@
 		FROM dic_consume_msg a
 		left JOIN dic_client  c ON c.id = a.client_id
 		<where>
-			a.del_flag = '0'
+			a.del_flag = '0' AND c.del_flag = '0'
 			<if test="numberPlate != null and numberPlate != ''">
 				AND c.number_plate LIKE
 				<if test="dbName == 'oracle'">'%'||#{numberPlate}||'%'</if>
@@ -154,7 +154,7 @@
 		FROM dic_consume_msg a
 		left JOIN dic_client  c ON c.id = a.client_id
 		<where>
-			a.del_flag = '0'
+			a.del_flag = '0' and c.del_flag = '0'
 			<if test="numberPlate != null and numberPlate != ''">
 				AND c.number_plate LIKE
 				<if test="dbName == 'oracle'">'%'||#{numberPlate}||'%'</if>

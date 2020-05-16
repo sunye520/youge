@@ -74,7 +74,7 @@ public class DicClientController extends BaseController {
 		}
 		String numberPlate = dicClient.getNumberPlate().trim();
 		dicClient.setNumberPlate(numberPlate);
-		int count = dicClientService.findCountByNumberPlate(numberPlate);
+		int count = dicClientService.findCountByNumberPlate(dicClient);
 		if(count>0){
 			addMessage(redirectAttributes, "保存客户资料失败，当前车牌已添加");
 			return "redirect:"+Global.getAdminPath()+"/dic/dicClient/?repage";
