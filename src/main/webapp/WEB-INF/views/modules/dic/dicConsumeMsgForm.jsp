@@ -95,7 +95,7 @@
 		<div class="control-group">
 			<label class="control-label">消费金额：</label>
 			<div class="controls">
-				<form:input type="number" path="consumeMoney" htmlEscape="false" value="0" class="input-xlarge required"/>
+				<form:input type="number" path="consumeMoney" htmlEscape="false" class="input-xlarge required"/>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>

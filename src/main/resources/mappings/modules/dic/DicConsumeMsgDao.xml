@@ -98,8 +98,7 @@
 	</insert>
 	
 	<update id="update">
-		UPDATE dic_consume_msg SET 	
-			number_plate = #{numberPlate},
+		UPDATE dic_consume_msg SET
 			update_date = #{updateDate},
 			consume_date = #{consumeDate},
 			consume_msg = #{consumeMsg},

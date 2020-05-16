@@ -30,6 +30,7 @@ import com.yogee.youge.common.utils.StringUtils;
 import com.yogee.youge.modules.dic.entity.DicConsumeMsg;
 import com.yogee.youge.modules.dic.service.DicConsumeMsgService;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -79,6 +80,7 @@ public class DicConsumeMsgController extends BaseController {
 		if(dicConsumeMsg.getIsNewRecord()){
 			//新增
 			model.addAttribute("consumeDate", new Date());
+			dicConsumeMsg.setConsumeMoney(new BigDecimal("0"));
 		}else{
 			//修改
 			model.addAttribute("consumeDate", dicConsumeMsg.getConsumeDate());
