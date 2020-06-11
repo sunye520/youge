@@ -66,10 +66,10 @@ public class DicConsumeMsgController extends BaseController {
 	@RequiresPermissions("dic:dicConsumeMsg:view")
 	@RequestMapping(value = {"list", ""})
 	public String list(DicConsumeMsg dicConsumeMsg, HttpServletRequest request, HttpServletResponse response, Model model) {
-		Page<DicConsumeMsg> page = dicConsumeMsgService.findPage(new Page<DicConsumeMsg>(request, response), dicConsumeMsg);
 		String sumMoney = dicConsumeMsgService.sumMoney(dicConsumeMsg);
-		model.addAttribute("page", page);
 		model.addAttribute("sumMoney", sumMoney);
+		Page<DicConsumeMsg> page = dicConsumeMsgService.findPage(new Page<DicConsumeMsg>(request, response), dicConsumeMsg);
+		model.addAttribute("page", page);
 		return "modules/dic/dicConsumeMsgList";
 	}
 
